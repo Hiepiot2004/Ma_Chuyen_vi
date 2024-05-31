@@ -3,29 +3,51 @@
 #include <limits>
 
 using namespace std;
-string encrypt_Scytale(const string& chuoi, int a) {
+string rm_Spaces(const string& input) {
     string result;
-    for (char c : chuoi) {
+    for (char c : input) {
         if (c != ' ') {
             result += c;
         }
     }
-
+    return result;
+}
+string encrypt_Scytale(const string& chuoi, int a) {
+    string result=rm_Spaces(chuoi);
     int n = result.length();
     int socot = (n + a - 1) / a;
+    int space=a*socot-n;
     char** arr = new char*[a];
     for (int i = 0; i < a; i++) {
         arr[i] = new char[socot];
     }
 
     int chiso = 0;
-    for (int i = 0; i < a; i++) {
+    if(n==a*socot){ 
+        for (int i = 0; i < a; i++) {
+        for (int j = 0; j < socot; j++) {
+                arr[i][j] = result[chiso];
+                chiso++;
+        }
+    }
+    }
+
+    else {
+    for (int i = 0; i < a-space; i++) {
         for (int j = 0; j < socot; j++) {
             if (chiso < n) {
                 arr[i][j] = result[chiso];
                 chiso++;
             }
         }
+    }
+    for(int i=a-space;i<a;i++){
+        for(int j=0;j<socot-1;j++){
+            arr[i][j]=result[chiso];
+            chiso++;
+        }
+        arr[i][socot-1]='@';
+    }
     }
 
     string mahoa;
@@ -39,16 +61,17 @@ string encrypt_Scytale(const string& chuoi, int a) {
         delete[] arr[i];
     }
     delete[] arr;
-    return mahoa;
+    string Mahoa=rm_Spaces(mahoa);
+    return Mahoa;
 }
 string decrypt_Scytale(const string& chuoi, int a){
   int n = chuoi.length();
       int socot = (n + a - 1) / a;
+      char* b = new char[a*socot];
       char** arr = new char*[a];
       for (int i = 0; i < a; i++) {
           arr[i] = new char[socot];
       }
-
       int chiso = 0;
       for (int j = 0; j < socot; j++) {
           for (int i = 0; i < a; i++) {
