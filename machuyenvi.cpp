@@ -46,7 +46,7 @@ string encrypt_Scytale(const string& chuoi, int a) {
             arr[i][j]=result[chiso];
             chiso++;
         }
-        arr[i][socot-1]='@';
+        arr[i][socot-1]=' ';
     }
     }
 
