@@ -130,18 +130,24 @@ string enter_text() {
 }
 int main(){
   cout << "____SCYTALE CIPHER______" << endl;
-  cout << "|  1. ECRYPT               |" << endl;
-  cout << "|  2. DECRYPTION           |" << endl;
-  cout << "!__________________________!" << endl;
+  cout << "|  1. ECRYPT            |" << endl;
+  cout << "|  2. DECRYPTION        |" << endl;
+  cout << "!_______________________!" << endl;
   cout << "SELECT OPTION: ";
   int option;
   while (true){
   cin >> option;
   cin.ignore(); 
+  if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
+            cout << "Invalid input. Please enter a number. ";
+            continue;
+        }
     if (option == 1 || option == 2) {
       break;
     } else {
-      cout << "Invalid selection. Please choose again (choose 1 or 2)." << endl;
+      cout << "Invalid selection. Please choose again (choose 1 or 2). " ;
     }
   }
   if (option == 1) {
